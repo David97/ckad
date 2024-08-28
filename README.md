@@ -193,11 +193,15 @@ kubect get pods -o yaml > pods.yaml
 ```
 
 ### _container logging_
+```sh
 kubectl logs -f <pod-name> <container-name>
+```
 
 ### _metric server_
+```sh
 git clone https://github.com/kubernetes-incubator/metrics-server
 kubectl create -f deploy/1.8+/
+```
 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
