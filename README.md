@@ -52,7 +52,7 @@ docker run python:3.6 cat /etc/*release*
 ```sh
 kubectl replace
 kubectl run webapp-green --image=nginx -- --color green
-kubectl run webapp-green --image=nginx –-command -- python app2.py -- --color green
+kubectl run webapp-green --image=nginx --command -- python app2.py -- --color green
 ```
 
 ### _configmap_
