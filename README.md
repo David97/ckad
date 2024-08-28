@@ -154,37 +154,43 @@ kubectl describe node node01 | grep Taints
 ```
 
 ### _multi-container pods_
+```sh
 kubectl logs app -n elastic-stack
 kubectl -n elastic-stack exec -it app – cat /log/app.log
+```
 
 ### _readiness probes_
+```sh
 containers:
--	name: 
-image:
-ports:
-readinessProbe:
-  httpGet:
-    path: /api/ready
-    port: 8080
-  initialDelaySeconds: 10
-  periodSeconds: 5
-  failureThreshold: 8
+- name: 
+  image:
+  ports:
+  readinessProbe:
+    httpGet:
+      path: /api/ready
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    failureThreshold: 8
+```
 
 ### _liveness probes_
+```sh
 containers:
--	name: 
-image:
-ports:
-livenessProbe:
-  httpGet:
-    path: /api/ready
-    port: 8080
-  initialDelaySeconds: 10
-  periodSeconds: 5
-  failureThreshold: 8
+- name: 
+  image:
+  ports:
+  livenessProbe:
+    httpGet:
+      path: /api/ready
+      port: 8080
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    failureThreshold: 8
 
 kubectl delete pods –all
 kubect get pods -o yaml > pods.yaml
+```
 
 ### _container logging_
 kubectl logs -f <pod-name> <container-name>
