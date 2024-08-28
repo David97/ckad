@@ -19,8 +19,8 @@ kubectl delete pod xxx yyy zzz
 ### _deployment_
 ```sh
 kubectl get all
-kubectl create deployment 123 --replicas=3 --image=nginx
-kubectl create deployment 123 --dry-run=client --replicas=3 --image=nginx -o yaml > sample.yaml
+kubectl create deployment hello --replicas=3 --image=nginx
+kubectl create deployment hello --dry-run=client --replicas=3 --image=nginx -o yaml > sample.yaml
 kubectl -o json, yaml, wide
 
 kubectl get pods -A
