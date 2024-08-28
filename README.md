@@ -201,13 +201,13 @@ kubectl logs -f <pod-name> <container-name>
 ```sh
 git clone https://github.com/kubernetes-incubator/metrics-server
 kubectl create -f deploy/1.8+/
-```
 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
 
 kubectl top node
 kubectl top pod
+```
 
 ### _selectors_
 kubectl get all –selector env=prod –no-headers | wc -l
