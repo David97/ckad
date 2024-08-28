@@ -3,13 +3,13 @@
 ### _general_
 
 ```sh
-kubectl run redis –image-redis123 –dry-run=client -o yaml > redis.yaml
+kubectl run redis --image=redis123 --dry-run=client -o=yaml > redis.yaml
 kubectl get pod redis -o yaml > edit.yaml
 kubectl edit pod redis
 
-kubectl replace --force -f replicaset-definition.yaml
-kubectl scale -replicas=6 -f replicaset-definition.yaml
-kubectl scale -replicas=6 replicset my-replicaset
+kubectl replace --force -f edit.yaml
+kubectl scale --replicas=6 -f edit.yaml
+kubectl scale --replicas=6 replicset my-replicaset
 
 kubectl explain replicaset
 kubectl get rs
@@ -302,7 +302,7 @@ kubectl config use-context xxx
 kubectl config -h
 kubectl config use-context research --kubeconfig=/root/my-kube-config
 
-roles
+### _roles_
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -337,7 +337,7 @@ kubectl config view
 kubectl create role developer --namespace=default --verb=list,create,delete --resource=pods
 kubectl create rolebinding dev-user-binding --namespace=default --role=developer --user=dev-user
 
-cluster roles
+### _cluster roles_
 kubectl api-resources – namespaced=true
 kubectl api-resources – namespaced=false
 
@@ -365,7 +365,7 @@ roleRef:
 
 kubectl auth can-i list nodes --as michelle
 
-admission controllers
+### _admission controllers###
 kube-apiserver -h | grep enable-admission-plugins
 kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
 
@@ -375,7 +375,7 @@ ps -ef | grep kube-apiserver | grep admission-plugins
 
 kubectl create secret tls webhook-server-tls --cert /root/keys/webhook-server-tls.crt --key /root/keys/webhook-server-tls.key
 
-api versions / deprecations
+### _api versions / deprecations_
 kubectl api-resources
 
 kubectl proxy 8001&
@@ -384,15 +384,11 @@ curl localhost:8001/apis/authorization.k8s.io
 curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert
 kubectl-convert -f ingress-old.yaml --output-version networking.k8s.io/v1 | kubectl apply -f -
 
-
-
-
-
-custom resource definition
+### _custom resource definition_
 kubectl get crd
 kubectl describe crd collectors.monitoring.controller
 
-helm
+### _helm_
 cat /etc/*release*
 helm –help
 helm env
