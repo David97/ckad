@@ -106,16 +106,24 @@ requests = limits for memory
 ```
 
 ### _taint_
+```sh
 kubectl taint nodes node01 spray=mortein:NoSchedule
 Kubectl taint nodes XXX app=blue:NoSchedule|PreferNoSchedule|NoExecute
+```
 
 ### _toleration_
-containers:
-tolerations:
--	key: “app”
-operator: “Equal”
-value: “blue”
-effect: “NoSchedule”
+```sh
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "blue"
+    effect: "NoSchedule"
+```
 
 ### _nodeSelector_
 kubectl label nodes node01 size=Large
