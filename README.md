@@ -17,16 +17,18 @@ kubectl delete pod xxx yyy zzz
 ```
 
 ### _deployment_
+```sh
 kubectl get all
-kubectl create deployment 123 –replicas=3 –image=xyz
-kubectl create deployment 123 –dry-run=client –replicas=3 –image=nginx -o yaml > sample.yaml
+kubectl create deployment 123 --replicas=3 --image=nginx
+kubectl create deployment 123 --dry-run=client --replicas=3 --image=nginx -o yaml > sample.yaml
 kubectl -o json, yaml, wide
 
 kubectl get pods -A
 
 kubectl create deployment hello --image=nginx --dry-run=client -o yaml > deployment.yaml
 
-Course: Kubernetes Certified Application Developer (CKAD) with Tests | Udemy
+[Course: Kubernetes Certified Application Developer (CKAD) with Tests | Udemy](https://www.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/14112621#reviews)
+```
 
 ### _service_
 kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
