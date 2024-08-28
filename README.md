@@ -108,7 +108,7 @@ requests = limits for memory
 ### _taint_
 ```sh
 kubectl taint nodes node01 spray=mortein:NoSchedule
-Kubectl taint nodes XXX app=blue:NoSchedule|PreferNoSchedule|NoExecute
+kubectl taint nodes XXX app=blue:NoSchedule|PreferNoSchedule|NoExecute
 ```
 
 ### _toleration_
