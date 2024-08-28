@@ -42,9 +42,11 @@ kubectl run httpd --image=httpd:alpine --dry-run=client -o yaml --expose=true --
 ```
 
 ### _docker_
-docker build -t webapp-color
+```sh
+docker build -t webapp-color .
 docker run --name webapp-color -p 8282:8080 webapp-color
 docker run python:3.6 cat /etc/*release*
+```
 
 ### _command and args_
 kubectl replace
