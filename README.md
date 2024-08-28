@@ -3,13 +3,13 @@
 ### _general_
 
 ```sh
-kubectl run redis --image=redis123 --dry-run=client -o=yaml > redis.yaml
+kubectl run redis --image=redis --dry-run=client -o=yaml > redis.yaml
 kubectl get pod redis -o yaml > edit.yaml
 kubectl edit pod redis
-
 kubectl replace --force -f edit.yaml
-kubectl scale --replicas=6 -f edit.yaml
-kubectl scale --replicas=6 replicset my-replicaset
+
+kubectl scale --replicas=6 -f deployment.yaml
+kubectl scale replicset my-replicaset --replicas=6
 
 kubectl explain replicaset
 kubectl get rs
