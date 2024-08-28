@@ -56,17 +56,24 @@ kubectl run webapp-green --image=nginx --command -- python app2.py -- --color gr
 ```
 
 ### _configmap_
+```sh
 kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=disregard
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-configmap
 spec:
   containers:
-  - env:
+  - name: envars-test-container
+    image: nginx
+    env:
     - name: APP_COLOR
       valueFrom:
-       configMapKeyRef:
-         name: webapp-config-map
-         key: APP_COLOR
-    image: kodekloud/webapp-color
-    name: webapp-color
+        configMapKeyRef:
+          name: webapp-config-map
+          key: APP_COLOR
+```
 
 ### _secret_
 kubectl create secret generic webapp-secret –from-literal=DB_HOST=mysql –from-literal=DB_PASSWORD=123
