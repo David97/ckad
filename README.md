@@ -76,16 +76,21 @@ spec:
 ```
 
 ### _secret_
-kubectl create secret generic webapp-secret –from-literal=DB_HOST=mysql –from-literal=DB_PASSWORD=123
-echo “mysql” | base64
+```sh
+kubectl create secret generic webapp-secret --from-literal=DB_HOST=mysql --from-literal=DB_PASSWORD=123
+echo "mysql" | base64
+
 Secret Store CSI Driver Tutorial | Kubernetes Secrets | AWS Secrets Manager | KodeKloud (youtube.com)
 
 kubectl run xxx -- whoami
+```
 
 ### _service account_
+```sh
 Kubectl create sa dashboard-sa
 Create role and role binding
 kubectl create token dashboard-sa
+```
 
 ### _requests and limits_
 image:
