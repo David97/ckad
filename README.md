@@ -87,21 +87,23 @@ kubectl run xxx -- whoami
 
 ### _service account_
 ```sh
-Kubectl create sa dashboard-sa
+kubectl create sa dashboard-sa
 Create role and role binding
 kubectl create token dashboard-sa
 ```
 
 ### _requests and limits_
+```sh
 image:
 resources:
   requests:
-    memory: “4Gi”
+    memory: "4Gi"
     cpu: 2
   limits:
     
-With Requests, no limits for CPU
-Requests = limits for memory
+with requests, no limits for CPU
+requests = limits for memory
+```
 
 ### _taint_
 kubectl taint nodes node01 spray=mortein:NoSchedule
