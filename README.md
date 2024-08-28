@@ -49,9 +49,11 @@ docker run python:3.6 cat /etc/*release*
 ```
 
 ### _command and args_
+```sh
 kubectl replace
-kubectl run webapp-green –image=xxx -- --color green
-kubectl run webapp-green –image=xxx –command – python app2.py -- --color green
+kubectl run webapp-green --image=nginx -- --color green
+kubectl run webapp-green --image=nginx –-command -- python app2.py -- --color green
+```
 
 ### _configmap_
 kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=disregard
