@@ -126,12 +126,16 @@ spec:
 ```
 
 ### _nodeSelector_
+```sh
 kubectl label nodes node01 size=Large
+
 containers:
 nodeSelector:
   size: Large
+```
 
 ### _affinity_
+```sh
 containers:
 affinity:
   nodeAffinity:
@@ -147,6 +151,7 @@ affinity:
 kubectl label node node01 color=blue
 
 kubectl describe node node01 | grep Taints
+```
 
 ### _multi-container pods_
 kubectl logs app -n elastic-stack
