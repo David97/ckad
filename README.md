@@ -9,7 +9,7 @@ kubectl edit pod redis
 kubectl replace --force -f edit.yaml
 
 kubectl scale --replicas=6 -f deployment.yaml
-kubectl scale replicset my-replicaset --replicas=6
+kubectl scale replicaset my-replicaset --replicas=6
 
 kubectl explain replicaset
 kubectl get rs
