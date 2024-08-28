@@ -31,13 +31,15 @@ kubectl create deployment hello --image=nginx --dry-run=client -o yaml > deploym
 ```
 
 ### _service_
+```sh
 kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
 kubectl expose pod nginx --port=80 --name nginx-service --type=NodePort --dry-run=client -o yaml
 
-kubectl run –help
-kubectl run –labels=”tier=db”
-kubectl create service –help
+kubectl run --help
+kubectl run nginx --image nginx --labels="tier=db"
+kubectl create service --help
 kubectl run httpd --image=httpd:alpine --dry-run=client -o yaml --expose=true --port 80
+```
 
 ### _docker_
 docker build -t webapp-color
