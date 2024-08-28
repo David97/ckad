@@ -65,8 +65,8 @@ metadata:
   name: env-configmap
 spec:
   containers:
-  - name: envars-test-container
-    image: nginx
+  - name: webapp-color
+    image: kodekloud/webapp-color
     env:
     - name: APP_COLOR
       valueFrom:
