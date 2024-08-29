@@ -210,10 +210,13 @@ kubectl top pod
 ```
 
 ### _selectors_
-kubectl get all –selector env=prod –no-headers | wc -l
-kubectl get all –selector env=prod,bu=finance,tier=frontend
+```sh
+kubectl get all --selector env=prod --no-headers | wc -l
+kubectl get all --selector env=prod,bu=finance,tier=frontend
+```
 
 ### _rolling updates and rollbacks_
+```sh
 kubectl create -f deployment.yaml --record
 kubectl rollout status deployment/my-deployment
 kubectl rollout history deployment/my-deployment
@@ -221,7 +224,8 @@ kubectl rollout history deployment/my-deployment
 kubectl set image deployment/my-deployment nginx-container=nginx:1.9.1
 
 kubectl rollout undo deployment/my-deployment
-kubectl rollout undo deployment/ my-deployment --to-revision=1
+kubectl rollout undo deployment/my-deployment --to-revision=1
+```
 
 ### _jobs_
 spec:
