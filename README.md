@@ -235,8 +235,8 @@ spec:
   template:
     spec:
       containers:
-        - name:
-          image:
+      - name:
+        image:
       restartPolicy: Never
 ```
 
@@ -257,6 +257,7 @@ spec:
 ```
 
 ### _service - NodePort_
+```sh
 spec:
   type: NodePort
   ports:
@@ -266,8 +267,10 @@ spec:
   selector:
     app: myapp
     type: frontend
+```
 
 ### _service - ClusterIP_
+```sh
 spec:
   type: ClusterIP
   ports:
@@ -276,13 +279,16 @@ spec:
   selector:
     app: myapp
     type: frontend
+```
 
 ### _ingress controller_
-kubectl create ingress ingress-pay -n critical-space –rule”/pay=pay-service:8282”
+```sh
+kubectl create ingress ingress-pay -n critical-space --rule "/pay=pay-service:8282"
 
 annotations:
   nginx.ingress.kubernetes.io/rewrite-target: /
-  nginx.ingress.kubernetes.io/ssl-redirect: “false”
+  nginx.ingress.kubernetes.io/ssl-redirect: "false"
+```
 
 ### _Network policy_
 apiVersion: networking.k8s.io/v1
