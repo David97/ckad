@@ -291,6 +291,7 @@ annotations:
 ```
 
 ### _Network policy_
+```sh
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata: 
@@ -309,8 +310,10 @@ spec:
     ports:
     - protocol: TCP
       port: 3306
+```
 
 ### _volume_
+```sh
 spec:
   containers:
   - image:
@@ -328,19 +331,22 @@ spec:
     awsElasticBlockStore:
       volumeID: <volume-id>
       fdType: ext4
+```
 
 ### _persistent volume_
+```sh
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-poll
 spec:
   accessModes:
-    - ReadWriteOnce | ReadOnlyMany | ReadWriteMany
+  - ReadWriteOnce | ReadOnlyMany | ReadWriteMany
   capacity
     storage: 1Gi
   hostPath:
     path: /tmp/data
+```
 
 ### _persistent volume claim_
 apiVersion: v1
