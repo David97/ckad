@@ -221,13 +221,14 @@ kubectl create -f deployment.yaml --record
 kubectl rollout status deployment/my-deployment
 kubectl rollout history deployment/my-deployment
 
-kubectl set image deployment/my-deployment nginx-container=nginx:1.9.1
+kubectl set image deployment/my-deployment <container_name>=nginx:1.9.1
 
 kubectl rollout undo deployment/my-deployment
 kubectl rollout undo deployment/my-deployment --to-revision=1
 ```
 
 ### _jobs_
+```sh
 spec:
   completions: 3
   parallelism: 3
@@ -237,20 +238,23 @@ spec:
         - name:
           image:
       restartPolicy: Never
+```
 
 ### _cronjobs_
+```sh
 spec:
-  schedule: “* * * * *”
+  schedule: "* * * * *"
   jobTamplate:
-spec:
-  completions: 3
-  parallelism: 3
-  template:
     spec:
-      containers:
-        - name:
-          image:
-      restartPolicy: Never
+      completions: 3
+      parallelism: 3
+      template:
+        spec:
+          containers:
+          - name:
+            image:
+          restartPolicy: Never
+```
 
 ### _service - NodePort_
 spec:
