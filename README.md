@@ -349,6 +349,7 @@ spec:
 ```
 
 ### _persistent volume claim_
+```sh
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -359,6 +360,7 @@ spec:
   resources:
     requests:
       storage: 500Mi
+```
 
 ### _kubeconfig_
 kubectl config view
