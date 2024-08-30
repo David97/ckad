@@ -156,7 +156,7 @@ kubectl describe node node01 | grep Taints
 ### _multi-container pods_
 ```sh
 kubectl logs app -n elastic-stack
-kubectl -n elastic-stack exec -it app – cat /log/app.log
+kubectl -n elastic-stack exec -it app -- cat /log/app.log
 ```
 
 ### _readiness probes_
@@ -188,7 +188,7 @@ containers:
     periodSeconds: 5
     failureThreshold: 8
 
-kubectl delete pods –all
+kubectl delete pods --all
 kubect get pods -o yaml > pods.yaml
 ```
 
@@ -363,11 +363,13 @@ spec:
 ```
 
 ### _kubeconfig_
+```sh
 kubectl config view
-kubectl config view –kubeconfig=my-custom-config
+kubectl config view --kubeconfig=my-custom-config
 kubectl config use-context xxx
 kubectl config -h
 kubectl config use-context research --kubeconfig=/root/my-kube-config
+```
 
 ### _roles_
 apiVersion: rbac.authorization.k8s.io/v1
@@ -395,7 +397,7 @@ roleRef:
 
 kubectl auth can-i create deployments
 kubectl auth can-I delete nodes
-kubectl auth can-I delete nodes –as dev-user –namespace test
+kubectl auth can-I delete nodes --as dev-user --namespace test
 
 kubectl describe pod kube-apiserver-controlplane -n kube-system | grep mode
 
@@ -405,8 +407,8 @@ kubectl create role developer --namespace=default --verb=list,create,delete --re
 kubectl create rolebinding dev-user-binding --namespace=default --role=developer --user=dev-user
 
 ### _cluster roles_
-kubectl api-resources – namespaced=true
-kubectl api-resources – namespaced=false
+kubectl api-resources -- namespaced=true
+kubectl api-resources -- namespaced=false
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -436,7 +438,7 @@ kubectl auth can-i list nodes --as michelle
 kube-apiserver -h | grep enable-admission-plugins
 kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
 
-kubectl exec -it kube-api-server-controlplane -n kube-system – kube-apiserver -h | grep ‘enable-admission-plugins’
+kubectl exec -it kube-api-server-controlplane -n kube-system -- kube-apiserver -h | grep ‘enable-admission-plugins’
 /etc/Kubernetes/manifests/kube-apiserver.yaml
 ps -ef | grep kube-apiserver | grep admission-plugins
 
@@ -457,7 +459,7 @@ kubectl describe crd collectors.monitoring.controller
 
 ### _helm_
 cat /etc/*release*
-helm –help
+helm --help
 helm env
 helm version
 
@@ -470,7 +472,7 @@ helm install release-1 bitnami/wordpress
 
 helm list
 helm uninstall my-release
-helm pull –untar bitnami/wordpress
+helm pull --untar bitnami/wordpress
 ls wordpress
 helm install release-4 ./wordpress
 
