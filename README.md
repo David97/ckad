@@ -443,7 +443,7 @@ kubectl auth can-i list nodes --as michelle
 kube-apiserver -h | grep enable-admission-plugins
 kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
 
-kubectl exec -it kube-api-server-controlplane -n kube-system -- kube-apiserver -h | grep ‘enable-admission-plugins’
+kubectl exec -it kube-api-server-controlplane -n kube-system -- kube-apiserver -h | grep 'enable-admission-plugins'
 /etc/Kubernetes/manifests/kube-apiserver.yaml
 ps -ef | grep kube-apiserver | grep admission-plugins
 
