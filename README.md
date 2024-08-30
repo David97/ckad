@@ -409,6 +409,7 @@ kubectl create rolebinding dev-user-binding --namespace=default --role=developer
 ```
 
 ### _cluster roles_
+```sh
 kubectl api-resources -- namespaced=true
 kubectl api-resources -- namespaced=false
 
@@ -417,26 +418,28 @@ kind: ClusterRole
 metadata:
   name: cluster-administrator
 rules:
--	apiGroups: [“”]
-resources: [“nodes”]
-verbs: [“list”, “get”, “create”, “update”, “delete”]
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["list", "get", "create", "update", "delete"]
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: cluster-admin-role-binding
 subjects:
--	kind: User
-name: cluster-admin
-apiGroup: rbac.authorization.k8s.io
+- kind: User
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
-      kind: ClusterRole
-      name: cluster administrator
-      apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster administrator
+  apiGroup: rbac.authorization.k8s.io
 
 kubectl auth can-i list nodes --as michelle
+```
 
 ### _admission controllers###
+```sh
 kube-apiserver -h | grep enable-admission-plugins
 kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
 
@@ -445,6 +448,7 @@ kubectl exec -it kube-api-server-controlplane -n kube-system -- kube-apiserver -
 ps -ef | grep kube-apiserver | grep admission-plugins
 
 kubectl create secret tls webhook-server-tls --cert /root/keys/webhook-server-tls.crt --key /root/keys/webhook-server-tls.key
+```
 
 ### _api versions / deprecations_
 kubectl api-resources
