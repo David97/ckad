@@ -372,15 +372,16 @@ kubectl config use-context research --kubeconfig=/root/my-kube-config
 ```
 
 ### _roles_
+```sh
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: developer
 rules:
--	apiGroups: [“”]
-resources: [“pods”]
-verbs: [“list”, “get”, “create”, “update”, “delete”]
-resourceNamers: [“blue”, “orange”]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list", "get", "create", "update", "delete"]
+  resourceNames: ["blue", "orange"]
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -388,16 +389,16 @@ metadata:
   name: devuser-developer-binding
 subjects:
 -	kind: User
-name: dev-user
-apiGroup: rbac.authorization.k8s.io
+  name: dev-user
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
-      kind: Role
-      name: developer
-      apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
 
 kubectl auth can-i create deployments
-kubectl auth can-I delete nodes
-kubectl auth can-I delete nodes --as dev-user --namespace test
+kubectl auth can-i delete nodes
+kubectl auth can-i delete nodes --as dev-user --namespace test
 
 kubectl describe pod kube-apiserver-controlplane -n kube-system | grep mode
 
@@ -405,6 +406,7 @@ kubectl config view
 
 kubectl create role developer --namespace=default --verb=list,create,delete --resource=pods
 kubectl create rolebinding dev-user-binding --namespace=default --role=developer --user=dev-user
+```
 
 ### _cluster roles_
 kubectl api-resources -- namespaced=true
