@@ -438,7 +438,7 @@ roleRef:
 kubectl auth can-i list nodes --as michelle
 ```
 
-### _admission controllers###
+### _admission controllers_
 ```sh
 kube-apiserver -h | grep enable-admission-plugins
 kubectl exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h | grep enable-admission-plugins
@@ -451,6 +451,7 @@ kubectl create secret tls webhook-server-tls --cert /root/keys/webhook-server-tl
 ```
 
 ### _api versions / deprecations_
+```sh
 kubectl api-resources
 
 kubectl proxy 8001&
@@ -458,12 +459,16 @@ curl localhost:8001/apis/authorization.k8s.io
 
 curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert
 kubectl-convert -f ingress-old.yaml --output-version networking.k8s.io/v1 | kubectl apply -f -
+```
 
 ### _custom resource definition_
+```sh
 kubectl get crd
 kubectl describe crd collectors.monitoring.controller
+```
 
 ### _helm_
+```sh
 cat /etc/*release*
 helm --help
 helm env
@@ -483,3 +488,4 @@ ls wordpress
 helm install release-4 ./wordpress
 
 helm repo list
+```
