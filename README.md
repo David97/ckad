@@ -635,5 +635,54 @@ spec:
     requests:
       storage: 1Gi
 
+# pod
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: gop-file-server
+  name: gop-file-server
+spec:
+  containers:
+  - image: kodekloud/fileserver
+    name: gop-file-server
+    resources: {}
+    volumeMounts:
+        - name: data-store
+          mountPath: /web
+  volumes:
+    - name: data-store
+      persistentVolumeClaim:
+        claimName: data-pvc
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
 
+# service
+kubectl expose pod gop-file-server --port=8080 --target-port=8080 --name gop-fs-service --type=NodePort --namespace default --dry-run=client -o yaml > service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: gop-file-server
+  name: gop-fs-service
+  namespace: default
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: gop-file-server
+  type: NodePort
+status:
+  loadBalancer: {}
+
+# copy image
+ls /media
+
+scp /media/* node01:/web
 ```
