@@ -536,4 +536,7 @@ users:
     client-certificate: /root/martin.crt
     client-key: /root/martin.key
 
+# context
+kubectl config use-context developer
+
 ```
