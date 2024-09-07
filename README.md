@@ -489,3 +489,21 @@ helm install release-4 ./wordpress
 
 helm repo list
 ```
+
+### _challenge 1_
+```sh
+# pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jekyll-site
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-storage
+```
