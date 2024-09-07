@@ -675,6 +675,7 @@ spec:
   - port: 8080
     protocol: TCP
     targetPort: 8080
+    nodePort: 31200
   selector:
     run: gop-file-server
   type: NodePort
