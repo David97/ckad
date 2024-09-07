@@ -570,4 +570,7 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
+
+# service
+kubectl expose pod jekyll --port=8080 --name jekyll --type=NodePort --namespace development --dry-run=client -o yaml
 ```
