@@ -593,3 +593,18 @@ spec:
 status:
   loadBalancer: {}
 ```
+
+### _challenge 2_
+```sh
+# kubeconfig
+nano ~/.kube/config
+
+# apiserver
+nano /etc/kubernetes/manifests/kube-apiserver.yaml
+
+# core cdn deployment
+kubectl edit deployments.apps -n kube-system
+
+
+
+```
