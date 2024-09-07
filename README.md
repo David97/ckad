@@ -687,3 +687,7 @@ ls /media
 
 scp /media/* node01:/web
 ```
+### _challenge 3_
+```sh
+
+```
