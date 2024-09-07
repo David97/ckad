@@ -506,4 +506,34 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: local-storage
+
+# role
+kubectl create role developer-role --namespace=development --verb=* --resource=services,persistentvolumeclaims,pods
+
+# rolebinding
+kubectl create rolebinding developer-rolebinding --namespace=development --role=developer-role --user=martin
+
+# user and context
+nano ~/.kube/config
+
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+- context:
+    cluster: kubernetes
+    user: martin
+  name: developer
+
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLVENDQWhHZ0F3SUJBZ0lJTVQ1S2RkbXdaeUV3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6Q>
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBOEZnOWVpOUd6TDJKT1JaZ2dMa0wvWWNhcjVzbDU5V1FkRmREVkdkbnBGUDdTYnJECithUlkreTA2RkNWSk5BSkN1Yk81d>
+- name: martin
+  user:
+    client-certificate: /root/martin.crt
+    client-key: /root/martin.key
+
 ```
