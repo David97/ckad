@@ -605,6 +605,35 @@ nano /etc/kubernetes/manifests/kube-apiserver.yaml
 # core cdn deployment
 kubectl edit deployments.apps -n kube-system
 
+# node01
+kubectl uncordon node01
+
+# pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-pv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/web"
+
+# pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
 
 
 ```
