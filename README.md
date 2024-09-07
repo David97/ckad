@@ -539,4 +539,35 @@ users:
 # context
 kubectl config use-context developer
 
+# pod
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: jekyll
+  name: jekyll
+  namespace: development
+spec:
+  initContainers:
+  - name: copy-jekyll-site
+    image: gcr.io/kodekloud/customimage/jekyll
+    command: ["jekyll", "new", "/site"]
+    volumeMounts:
+        - name: site
+          mountPath: /site
+  containers:
+  - image: gcr.io/kodekloud/customimage/jekyll-serve
+    name: jekyll
+    volumeMounts:
+        - name: site
+          mountPath: /site
+    resources: {}
+  volumes:
+    - name: site
+      persistentVolumeClaim:
+        claimName: jekyll-site
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
 ```
