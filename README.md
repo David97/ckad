@@ -569,8 +569,27 @@ spec:
         claimName: jekyll-site
   dnsPolicy: ClusterFirst
   restartPolicy: Always
-status: {}
 
 # service
-kubectl expose pod jekyll --port=8080 --name jekyll --type=NodePort --namespace development --dry-run=client -o yaml
+kubectl expose pod jekyll --port=8080 --target-port=4000 --name jekyll --type=NodePort --namespace development --dry-run=client -o yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: jekyll
+  name: jekyll
+  namespace: development
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 4000
+    nodePort: 30097
+  selector:
+    run: jekyll
+  type: NodePort
+status:
+  loadBalancer: {}
 ```
