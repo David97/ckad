@@ -689,5 +689,73 @@ scp /media/* node01:/web
 ```
 ### _challenge 3_
 ```sh
+# redis deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: redis-deployment
+  name: redis-deployment
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: redis-deployment
+    spec:
+      containers:
+      - image: redis:alpine
+        name: redis
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
+        resources: {}
+      volumes:
+      - name: redis-data
+        emptyDir:
+          sizeLimit: 500Mi
+status: {}
 
+# worker deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: db-deployment
+  name: db-deployment
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: db-deployment
+    spec:
+      containers:
+      - image: postgres:9.4
+        name: postgres
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+        env:
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: trust
+      volumes:
+      - name: db-data
+        emptyDir:
+          sizeLimit: 500Mi
 ```
