@@ -690,6 +690,8 @@ scp /media/* node01:/web
 ### _challenge 3_
 ```sh
 # redis deployment
+kubectl create deployment redis-deployment -n vote --image=redis:alpine --dry-run=client -o yaml > redis-deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -722,6 +724,9 @@ spec:
         emptyDir:
           sizeLimit: 500Mi
 status: {}
+
+# redis service
+kubectl expose deployment redis-deployment -n vote --port=6379 --target-port=6379 --type=ClusterIP --name=redis --dry-run=client -o yaml > redis-service.yaml
 
 # db deployment
 kubectl create deployment db-deployment -n vote --image=postgres:9.4 --dry-run=client -o yaml > db-deployment.yaml
@@ -763,4 +768,10 @@ spec:
 
 # db service
 kubectl expose deployment db-deployment -n vote --name db --port=5432 --target-port=5432 --type=ClusterIP --dry-run=client -o yaml > db-service.yaml
+
+# result deployment
+kubectl create deployment result-deployment --image kodekloud/examplevotingapp_result:before -n vote --dry-run=client -o yaml > result-deployment.yaml
+
+# result service
+
 ```
