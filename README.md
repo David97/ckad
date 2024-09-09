@@ -723,7 +723,9 @@ spec:
           sizeLimit: 500Mi
 status: {}
 
-# worker deployment
+# db deployment
+kubectl create deployment db-deployment -n vote --image=postgres:9.4 --dry-run=client -o yaml > db-deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -758,4 +760,7 @@ spec:
       - name: db-data
         emptyDir:
           sizeLimit: 500Mi
+
+# db service
+kubectl expose deployment db-deployment -n vote --name db --port=5432 --target-port=5432 --type=ClusterIP --dry-run=client -o yaml > db-service.yaml
 ```
