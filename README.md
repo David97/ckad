@@ -773,5 +773,5 @@ kubectl expose deployment db-deployment -n vote --name db --port=5432 --target-p
 kubectl create deployment result-deployment --image kodekloud/examplevotingapp_result:before -n vote --dry-run=client -o yaml > result-deployment.yaml
 
 # result service
-
+kubectl expose deployment result-deployment --name result-service -n vote --port 5001 --target-port 80 --type NodePort --dry-run=client -o yaml > result-service.yaml
 ```
