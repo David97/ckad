@@ -342,7 +342,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce | ReadOnlyMany | ReadWriteMany
-  capacity
+  capacity:
     storage: 1Gi
   hostPath:
     path: /tmp/data
@@ -780,4 +780,9 @@ kubectl create deployment result-deployment --image kodekloud/examplevotingapp_r
 
 # result service
 kubectl expose deployment result-deployment --name result-service -n vote --port 5001 --target-port 80 --type NodePort --dry-run=client -o yaml > result-service.yaml
+```
+
+### _challenge 4_
+```sh
+#
 ```
