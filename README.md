@@ -784,5 +784,17 @@ kubectl expose deployment result-deployment --name result-service -n vote --port
 
 ### _challenge 4_
 ```sh
-#
+# redis01
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis01
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /root/redis01
+
 ```
