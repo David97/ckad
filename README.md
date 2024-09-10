@@ -813,6 +813,11 @@ spec:
       labels:
         app: redis-cluster
     spec:
+      volumes:
+      - name: conf
+        configMap:
+          name: redis-cluster-configmap
+          defaultMode: 0755
       containers:
       - name: redis
         image: redis:5.0.1-alpine
@@ -834,10 +839,6 @@ spec:
         - name: data
           mountPath: '/data'
           readOnly: false
-    #volumes:
-    #- name: conf
-    #  configMap:
-    #    name: redis-cluster-configmap
   volumeClaimTemplates:
   - metadata:
       name: data
