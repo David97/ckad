@@ -848,4 +848,25 @@ spec:
         requests:
           storage: 1Gi
 
+# redis cluster service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cluster-service
+  labels:
+    app: redis-cluster
+spec:
+  ports:
+  - port: 6379
+    name: client
+    targetPort: 6379
+  - name: gossip
+    port: 16379
+    targetPort: 16379
+  clusterIP: None
+  selector:
+    app: redis-cluster
+
+# redis cluster config
+kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
 ```
