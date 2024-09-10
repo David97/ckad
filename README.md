@@ -689,6 +689,12 @@ scp /media/* node01:/web
 ```
 ### _challenge 3_
 ```sh
+# vote deployment
+kubectl create deployment vote-deployment --image kodekloud/examplevotingapp_vote:before -n vote --dry-run=client -o yaml > vote-deployment.yaml
+
+# vote service
+kubectl expose deployment vote-deployment --name vote-service -n vote --port 5000 --target-port 80 --dry-run=client -o yaml > vote-service.yaml
+
 # redis deployment
 kubectl create deployment redis-deployment -n vote --image=redis:alpine --dry-run=client -o yaml > redis-deployment.yaml
 
