@@ -877,4 +877,8 @@ kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replica
 KUBE_EDITOR=nano kubectl edit deploy nginx
 
 alias k=kubectl
+
+k config set-context mycontext --namespace=mynamespace
+
+kubectl explain cronjob.spec.jobTemplate --recursive
 ```
