@@ -803,16 +803,18 @@ kind: StatefulSet
 metadata:
   name: redis-cluster
 spec:
-  serviceName: "redis-cluster-service"
-  replicas: 6
   selector:
     matchLabels:
-      app: redis-cluster
+      app: redis-cluster # has to match .spec.template.metadata.labels
+  serviceName: "redis-cluster-service"
+  replicas: 6 # by default is 1
+  minReadySeconds: 10 # by default is 0
   template:
     metadata:
       labels:
-        app: redis-cluster
+        app: redis-cluster  # has to match .spec.selector.matchLabels
     spec:
+      terminationGracePeriodSeconds: 10
       volumes:
       - name: conf
         configMap:
@@ -826,18 +828,19 @@ spec:
         - name: POD_IP
           valueFrom:
             fieldRef:
-              fieldPath: 'status.podIP'
+              fieldPath: status.podIP
+              apiVersion: v1
         ports:
         - containerPort: 6379
           name: client
-        - name: gossip
-          containerPort: 16379
+        - containerPort: 16379
+          name: gossip
         volumeMounts:
         - name: conf
           mountPath: /conf
           readOnly: false
         - name: data
-          mountPath: '/data'
+          mountPath: /data
           readOnly: false
   volumeClaimTemplates:
   - metadata:
@@ -853,17 +856,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-cluster-service
-  labels:
-    app: redis-cluster
 spec:
+  type: ClusterIP
   ports:
-  - port: 6379
-    name: client
-    targetPort: 6379
-  - name: gossip
-    port: 16379
-    targetPort: 16379
-  clusterIP: None
+    - name: client
+      port: 6379
+      targetPort: 6379
+    - name: gossip
+      port: 16379
+      targetPort: 16379
   selector:
     app: redis-cluster
 
