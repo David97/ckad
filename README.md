@@ -875,4 +875,6 @@ kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replica
 ### _tips_
 ```sh
 KUBE_EDITOR=nano kubectl edit deploy nginx
+
+alias k=kubectl
 ```
