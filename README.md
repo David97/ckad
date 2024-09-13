@@ -318,7 +318,7 @@ spec:
   containers:
   - image:
     volumeMounts:
-    - mountPath: / opt
+    - mountPath: /opt
       name: data-volume
   volumes:
   - name: data-volume
@@ -346,6 +346,7 @@ spec:
     storage: 1Gi
   hostPath:
     path: /tmp/data
+  storageClassName: ""
 ```
 
 ### _persistent volume claim_
@@ -360,6 +361,7 @@ spec:
   resources:
     requests:
       storage: 500Mi
+  storageClassName: ""
 ```
 
 ### _kubeconfig_
