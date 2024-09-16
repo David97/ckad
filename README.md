@@ -302,7 +302,7 @@ spec:
       role: db
   policyTypes:
   - Ingress
-  Ingress
+  Ingress:
   - from:
     - podSelector:
         matchLabels:
