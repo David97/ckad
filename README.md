@@ -910,16 +910,15 @@ kind: PersistentVolume
 metadata:
   name: log-volume
 spec:
+  accessModes:
+  - ReadWriteMany
   capacity:
     storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  storageClassName: manual
   hostPath:
     path: /opt/volume/nginx
+  storageClassName: "manual"
 
 # pvc
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -930,16 +929,15 @@ spec:
   resources:
     requests:
       storage: 200Mi
-  storageClassName: manual
+  storageClassName: "manual"
 
 # pod
----
 apiVersion: v1
 kind: Pod
 metadata:
+  creationTimestamp: null
   labels:
     run: logger
-# pod name
   name: logger
 spec:
   containers:
@@ -948,10 +946,13 @@ spec:
     volumeMounts:
     - name: log
       mountPath: /var/www/nginx
+    resources: {}
   volumes:
-  - name: log
-    persistentVolumeClaim:
-        claimName: log-claim
+      - name: log
+        persistentVolumeClaim:
+          claimName: log-claim
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
 ```
 
 #### Q2
