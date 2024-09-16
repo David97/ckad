@@ -295,7 +295,7 @@ annotations:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata: 
-  name: db-polciy
+  name: db-policy
 spec:
   podSelector:
     matchLabels:
@@ -965,7 +965,6 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: test-network-policy
-  namespace: default
 spec:
   podSelector:
     matchLabels:
@@ -980,7 +979,6 @@ spec:
     ports:
     - protocol: TCP
       port: 80
-
 ```
 
 then check the connectivity from the webapp-color pod to the secure-pod:-
