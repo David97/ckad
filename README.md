@@ -965,6 +965,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: test-network-policy
+  namespace: default
 spec:
   podSelector:
     matchLabels:
