@@ -902,11 +902,63 @@ kubectl create service clusterip my-cs --tcp=5678:8080 --dry-run -o yaml
 ```
 
 ### _lab 1_
-Q2
-Solution
+#### Q1
+```sh
+# pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: log-volume
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  hostPath:
+    path: /opt/volume/nginx
+
+# pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: log-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi
+  storageClassName: manual
+
+# pod
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: logger
+# pod name
+  name: logger
+spec:
+  containers:
+  - image: nginx:alpine
+    name: logger
+    volumeMounts:
+    - name: log
+      mountPath: /var/www/nginx
+  volumes:
+  - name: log
+    persistentVolumeClaim:
+        claimName: log-claim
+```
+
+#### Q2
 Incoming or outgoing connections are not working because of network policy. In the default namespace, we deployed a default-deny network policy which is interrupting the incoming or outgoing connections.
 
 Now, create a network policy called test-network-policy to allow the connections, as follows:-
+
 ```sh
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -937,16 +989,12 @@ root@controlplane:~$ kubectl exec -it webapp-color -- sh
 /opt # nc -v -z -w 5 secure-service 80
 ```
 
-Create a pod called time-check in the dvl1987 namespace. This pod should run a container called time-check that uses the busybox image.
-
-Create a config map called time-config with the data TIME_FREQ=10 in the same namespace.
-The time-check container should run the command: while true; do date; sleep $TIME_FREQ;done and write the result to the location /opt/time/time-check.log.
-The path /opt/time on the pod should mount a volume that lasts the lifetime of this pod.
-
-
+#### Q3
 Create a namespace called dvl1987 by using the below command:-
 
+```sh  
 $ kubectl create namespace dvl1987
+```
 
 Solution manifest file to create a configMap called time-config in the given namespace as follows:-
 
@@ -959,7 +1007,9 @@ metadata:
   name: time-config
   namespace: dvl1987
 ```
+
 Now, create a pod called time-check in the same namespace as follows:-
+
 ```sh
 ---
 apiVersion: v1
@@ -991,28 +1041,24 @@ spec:
     - "while true; do date; sleep $TIME_FREQ;done > /opt/time/time-check.log"
 ```
 
-
-Q4
-Task
-Create a new deployment called nginx-deploy, with one single container called nginx, image nginx:1.16 and 4 replicas.
-The deployment should use RollingUpdate strategy with maxSurge=1, and maxUnavailable=2.
-
-Next upgrade the deployment to version 1.17.
-
-Finally, once all pods are updated, undo the update and go back to the previous version.
-
+#### Q4
 Run the following command to create a manifest for deployment nginx-deploy and save it into a file:-
 
+```sh
 kubectl create deployment nginx-deploy --image=nginx:1.16 --replicas=4 --dry-run=client -oyaml > nginx-deploy.yaml
+```
 
 and add the strategy field under the spec section as follows:-
 
+```sh
   strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 2
+```
 
 So final manifest file for deployment called nginx-deploy should looks like below:-
+
 ```sh
 apiVersion: apps/v1
 kind: Deployment
@@ -1046,34 +1092,18 @@ then run the kubectl apply -f nginx-deploy.yaml to create a deployment resource.
 
 Now, upgrade the deployment's image version using the kubectl set image command:-
 
+```sh
 kubectl set image deployment nginx-deploy nginx=nginx:1.17
+```
 
 Run the kubectl rollout command to undo the update and go back to the previous version:-
 
+```sh
 kubectl rollout undo deployment nginx-deploy
+```
 
+#### Q5
 
-Q5
-
-Task
-Create a redis deployment with the following parameters:
-
-Name of the deployment should be redis using the redis:alpine image. It should have exactly 1 replica.
-
-The container should request for .2 CPU. It should use the label app=redis.
-
-It should mount exactly 2 volumes.
-
-a. An Empty directory volume called data at path /redis-master-data.
-
-b. A configmap volume called redis-config at path /redis-master.
-
-c. The container should expose the port 6379.
-
-
-The configmap has already been created.
-
-Solution
 Solution manifest file to create a deployment redis as follows:-
 ```sh
 apiVersion: apps/v1
