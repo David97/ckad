@@ -1141,3 +1141,31 @@ spec:
           requests:
             cpu: "0.2"
 ```
+
+### _lab 2_
+#### Q2
+```sh
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: dice
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: dice
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: kodekloud/throw-dice
+            name: throw-dice
+            resources: {}
+          restartPolicy: Never
+      backoffLimit: 25 
+  schedule: '* * * * *'
+status: {}
+```
