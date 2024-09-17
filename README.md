@@ -1169,3 +1169,31 @@ spec:
   schedule: '* * * * *'
 status: {}
 ```
+
+#### Q3
+```sh
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-busybox
+  name: my-busybox
+spec:
+  containers:
+  - image: busybox
+    name: secret
+    command: ["sleep", "3600"]
+    volumeMount:
+    - mountPath: /etc/secret-volume
+      name: secret-volume
+      readOnly: true
+    resources: {}
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: dotfile-secret
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
