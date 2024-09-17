@@ -1197,3 +1197,34 @@ spec:
   restartPolicy: Always
 status: {}
 ```
+
+### Q4
+```sh
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: ingress-vh-routing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: video-service
+            port:
+              number: 30093
+        path: /video
+        pathType: Exact
+      - backend:
+          service:
+            name: apparels-service
+            port:
+              number: 30093
+        path: /wear
+        pathType: Exact
+status:
+  loadBalancer: {}
+```
