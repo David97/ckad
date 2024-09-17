@@ -1145,6 +1145,8 @@ spec:
 ### _lab 2_
 #### Q2
 ```sh
+kubectl create cronjob dice --image=throw-dic --schedule='* * * * *' --dry-run=client -o yaml > cronjob.yaml
+
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -1200,6 +1202,8 @@ status: {}
 
 ### Q4
 ```sh
+kubectl create ingress ingress-vh-routing --rule "/video=video-service:30093" --rule "/wear=apparels-service:30093" --dry-run=client -o yaml > ingress.yaml
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
