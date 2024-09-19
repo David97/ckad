@@ -1230,7 +1230,7 @@ status: {}
 
 #### Q4
 ```sh
-kubectl create ingress ingress-vh-routing --rule "/video=video-service:30093" --rule "/wear=apparels-service:30093" --dry-run=client -o yaml > ingress.yaml
+kubectl create ingress ingress-vh-routing --rule "watch.ecom-store.com/video=video-service:8080" --rule "appareals.ecom-store.com/wear=apparels-service:8080" --dry-run=client -o yaml > ingress.yaml
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -1241,56 +1241,26 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
-      paths:
-      - backend:
-          service:
-            name: video-service
-            port:
-              number: 30093
-        path: /video
-        pathType: Exact
-      - backend:
-          service:
-            name: apparels-service
-            port:
-              number: 30093
-        path: /wear
-        pathType: Exact
-status:
-  loadBalancer: {}
-```
-
-#### Q4
-```sh
-kind: Ingress
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: ingress-vh-routing
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
   - host: watch.ecom-store.com
     http:
       paths:
-      - pathType: Prefix
-        path: "/video"
-        backend:
+      - backend:
           service:
             name: video-service
             port:
               number: 8080
-  - host: apparels.ecom-store.com
+        path: /video
+        pathType: Exact
+  - host: appareals.ecom-store.com
     http:
       paths:
-      - pathType: Prefix
-        path: "/wear"
-        backend:
+      - backend:
           service:
             name: apparels-service
             port:
               number: 8080
+        path: /wear
+        pathType: Exact
 ```
 
 #### Q5
