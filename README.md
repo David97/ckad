@@ -1232,10 +1232,9 @@ status: {}
 ```sh
 kubectl create ingress ingress-vh-routing --rule "watch.ecom-store.com/video=video-service:8080" --rule "appareals.ecom-store.com/wear=apparels-service:8080" --dry-run=client -o yaml > ingress.yaml
 
-apiVersion: networking.k8s.io/v1
 kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
-  creationTimestamp: null
   name: ingress-vh-routing
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -1244,23 +1243,23 @@ spec:
   - host: watch.ecom-store.com
     http:
       paths:
-      - backend:
+      - pathType: Prefix
+        path: "/video"
+        backend:
           service:
             name: video-service
             port:
               number: 8080
-        path: /video
-        pathType: Exact
-  - host: appareals.ecom-store.com
+  - host: apparels.ecom-store.com
     http:
       paths:
-      - backend:
+      - pathType: Prefix
+        path: "/wear"
+        backend:
           service:
             name: apparels-service
             port:
               number: 8080
-        path: /wear
-        pathType: Exact
 ```
 
 #### Q5
