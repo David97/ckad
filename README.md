@@ -1143,7 +1143,7 @@ spec:
 ```
 
 ### _lab 2_
-### Q1
+#### Q1
 The pod nginx1401 is not in a Ready state as the Readiness Probe has failed. Here is the solution YAML file:
 ```sh
 apiVersion: v1
@@ -1225,7 +1225,7 @@ spec:
 status: {}
 ```
 
-### Q4
+#### Q4
 ```sh
 kubectl create ingress ingress-vh-routing --rule "/video=video-service:30093" --rule "/wear=apparels-service:30093" --dry-run=client -o yaml > ingress.yaml
 
@@ -1262,7 +1262,7 @@ status:
 
 
 
-### Q3
+#### Q3
 ```sh
 apiVersion: v1
 kind: Pod
@@ -1292,7 +1292,7 @@ spec:
       mountPath: "/etc/secret-volume"
 ```
 
-### Q4
+#### Q4
 ```sh
 kind: Ingress
 apiVersion: networking.k8s.io/v1
@@ -1324,7 +1324,7 @@ spec:
               number: 8080
 ```
 
-### Q5
+#### Q5
 ```sh
 kubectl logs dev-pod-dind-878516 -c log-x | grep WARNING > /opt/dind-878516_logs.txt
 ```
