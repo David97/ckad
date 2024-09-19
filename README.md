@@ -1145,7 +1145,7 @@ spec:
 ### _lab 2_
 #### Q2
 ```sh
-kubectl create cronjob dice --image=throw-dic --schedule='* * * * *' --dry-run=client -o yaml > cronjob.yaml
+kubectl create cronjob dice --image=throw-dic --schedule='*/1 * * * *' --dry-run=client -o yaml > cronjob.yaml
 
 apiVersion: batch/v1
 kind: CronJob
