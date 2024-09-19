@@ -1211,7 +1211,7 @@ spec:
   - image: busybox
     name: secret
     command: ["sleep", "3600"]
-    volumeMount:
+    volumeMounts:
     - mountPath: /etc/secret-volume
       name: secret-volume
       readOnly: true
