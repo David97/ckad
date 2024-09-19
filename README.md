@@ -1164,7 +1164,7 @@ spec:
     readinessProbe:
       httpGet:
         path: /
-        port: 9080    
+        port: 9080
     livenessProbe:
       exec:
         command:
