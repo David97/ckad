@@ -1145,31 +1145,25 @@ spec:
 ### _lab 2_
 #### Q2
 ```sh
-kubectl create cronjob dice --image=throw-dic --schedule='*/1 * * * *' --dry-run=client -o yaml > cronjob.yaml
+kubectl create cronjob dice --image=kodekloud/throw-dice --schedule='*/1 * * * *' --dry-run=client -o yaml > cronjob.yaml
 
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  creationTimestamp: null
   name: dice
 spec:
+  schedule: "*/1 * * * *"
   jobTemplate:
-    metadata:
-      creationTimestamp: null
-      name: dice
     spec:
+      completions: 1
+      backoffLimit: 25 # This is so the job does not quit before it succeeds.
+      activeDeadlineSeconds: 20
       template:
-        metadata:
-          creationTimestamp: null
         spec:
           containers:
-          - image: kodekloud/throw-dice
-            name: throw-dice
-            resources: {}
+          - name: dice
+            image: kodekloud/throw-dice
           restartPolicy: Never
-      backoffLimit: 25 
-  schedule: '* * * * *'
-status: {}
 ```
 
 #### Q3
