@@ -960,10 +960,12 @@ spec:
 kubectl exec -it webapp-color -- sh
 nc -v -z -w 2 secure-service 80
 ```
-
 Incoming or outgoing connections are not working because of network policy. In the default namespace, we deployed a default-deny network policy which is interrupting the incoming or outgoing connections.
 
 Now, create a network policy called test-network-policy to allow the connections, as follows:-
+```sh
+kubectl get pod --show-labels
+```
 
 ```sh
 apiVersion: networking.k8s.io/v1
