@@ -1273,3 +1273,9 @@ spec:
 ```sh
 kubectl logs dev-pod-dind-878516 -c log-x | grep WARNING > /opt/dind-878516_logs.txt
 ```
+
+### _Mock Exam 2_
+#### Q4
+```sh
+kubectl create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080" --dry-run=client -o yaml > ingress.yaml
+```
