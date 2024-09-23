@@ -1279,3 +1279,8 @@ kubectl logs dev-pod-dind-878516 -c log-x | grep WARNING > /opt/dind-878516_logs
 ```sh
 kubectl create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080" --dry-run=client -o yaml > ingress.yaml
 ```
+
+#### Q7
+```sh
+kubectl create job whalesay --image=docker/whalesay --dry-run=client -o yaml > whalesay.yaml
+```
