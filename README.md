@@ -1346,3 +1346,35 @@ spec:
 status: {}
 ```
 
+#### Q6
+```sh
+kubectl run pod6 -n default --image busybox:1.31.0 --dry-run=client -o yaml > pod6.yaml --command -- sh -c "touch /tmp/ready && sleep 1d"
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod6
+  name: pod6
+spec:
+  containers:
+  - command:
+    - sh
+    - -c
+    - touch /tmp/ready && sleep 1d
+    image: busybox:1.31.0
+    name: pod6
+    resources: {}
+    readinessProbe:                             # add
+      exec:                                     # add
+        command:                                # add
+        - sh                                    # add
+        - -c                                    # add
+        - cat /tmp/ready                        # add
+      initialDelaySeconds: 5                    # add
+      periodSeconds: 10                         # add
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
