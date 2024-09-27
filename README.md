@@ -1317,6 +1317,32 @@ kubectl -n default describe pod pod1 | grep -i status:
 
 #### Q3
 ```sh
+kubectl create job neb-new-job --image=busybox:1.31.0 -n default --dry-run=client -oyaml > job.yaml -- sh -c "sleep 2 && echo done"
 
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: neb-new-job
+  namespace: neptune      # add
+spec:
+  completions: 3          # add
+  parallelism: 2          # add
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:             # add
+        id: awesome-job   # add
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - sleep 2 && echo done
+        image: busybox:1.31.0
+        name: neb-new-job-container # update
+        resources: {}
+      restartPolicy: Never
+status: {}
 ```
 
