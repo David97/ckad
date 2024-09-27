@@ -1284,3 +1284,39 @@ kubectl create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-vid
 ```sh
 kubectl create job whalesay --image=docker/whalesay --dry-run=client -o yaml > whalesay.yaml
 ```
+
+### _Simulator_
+#### Q1
+```sh
+kubectl get ns -A > /opt/course/1/namespaces
+```
+
+#### Q2
+```sh
+kubectl run pod1 --image httpd:2.4.41-alpine --namespace default --dry-run=client -o yaml > pod1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod1
+  name: pod1
+  namespace: default
+spec:
+  containers:
+  - image: httpd:2.4.41-alpine
+    name: pod1-container
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+kubectl -n default describe pod pod1 | grep -i status:
+```
+
+#### Q3
+```sh
+
+```
+
