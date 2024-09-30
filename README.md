@@ -1422,7 +1422,11 @@ spec:
 
 #### Q10
 ```sh
+kubectl run project-plt-6cc-api --image=nginx:1.17.3-alpine -n pluto --labels="project=plt-6cc-api" -o yaml --dry-run=client > pod.yaml
 
+kubectl expose pod project-plt-6cc-api --name project-plt-6cc-svc -n pluto --port 3333 --target-port 80 -o yaml --dry-run=client > service.yaml
+
+kubectl run tmp --restart=Never --rm --image=nginx:alpine -i -- curl http://project-plt-6cc-svc.pluto:3333
 ```
 
 #### Q11
