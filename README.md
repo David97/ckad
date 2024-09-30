@@ -1436,7 +1436,7 @@ kubectl exec -it temp -- curl http://project-plt-6cc-svc.pluto:3333/ > test.html
 
 #### Q12
 ```sh
-
+kubectl create deployment project-earthflower --image=httpd:2.4.41-alpine -n earth --dry-run=client -oyaml > deployment.yaml
 ```
 
 #### Q13
