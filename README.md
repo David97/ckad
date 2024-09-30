@@ -1346,6 +1346,16 @@ spec:
 status: {}
 ```
 
+#### Q4
+```sh
+
+```
+
+#### Q5
+```sh
+
+```
+
 #### Q6
 ```sh
 kubectl run pod6 -n default --image busybox:1.31.0 --dry-run=client -o yaml > pod6.yaml --command -- sh -c "touch /tmp/ready && sleep 1d"
