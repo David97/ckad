@@ -1441,12 +1441,36 @@ kubectl create deployment project-earthflower --image=httpd:2.4.41-alpine -n ear
 
 #### Q13
 ```sh
+# storage class
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: moon-retain
+provisioner:  moon-retainer
+reclaimPolicy: Retain
+
+# pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: moon-pvc-126
+  namespace: moon
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: moon-retain
+
+# 
+
 
 ```
 
 #### Q14
 ```sh
-
+kubectl create secret generic secret1 -n moon --from-literal=user=test --from-literal=pass=pwd -o yaml --dry-run=client > secret.yaml
 ```
 
 #### Q15
