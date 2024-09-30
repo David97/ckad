@@ -1391,5 +1391,86 @@ k -n marketing rollout -h
 k -n marketing rollout history -h
 k -n marketing rollout history deploy redis
 k -n marketing rollout undo deploy redis
+```
+
+#### Q9
+```sh
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: holy-api        # name stays the same
+  namespace: pluto      # important
+spec:
+  replicas: 3           # 3 replicas
+  selector:
+    matchLabels:
+      id: holy-api      # set the correct selector
+  template:
+    metadata:
+    spec:
+```
+
+#### Q10
+```sh
+
+```
+
+#### Q11
+```sh
+
+```
+
+#### Q12
+```sh
+
+```
+
+#### Q13
+```sh
+
+```
+
+#### Q14
+```sh
+
+```
+
+#### Q15
+```sh
+
+```
+
+#### Q16
+```sh
+
+```
+
+#### Q17
+```sh
+
+```
+
+#### Q18
+```sh
+
+```
+
+#### Q19
+```sh
+
+```
+
+#### Q20
+```sh
+
+```
+
+#### Q21
+```sh
+
+```
+
+#### Q22
+```sh
 
 ```
