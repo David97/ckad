@@ -1390,4 +1390,6 @@ k -n marketing get deploy # overview
 k -n marketing rollout -h
 k -n marketing rollout history -h
 k -n marketing rollout history deploy redis
+k -n marketing rollout undo deploy redis
+
 ```
