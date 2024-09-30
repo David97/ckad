@@ -1426,7 +1426,7 @@ kubectl run project-plt-6cc-api --image=nginx:1.17.3-alpine -n pluto --labels="p
 
 kubectl expose pod project-plt-6cc-api --name project-plt-6cc-svc -n pluto --port 3333 --target-port 80 -o yaml --dry-run=client > service.yaml
 
-kubectl run tmp --restart=Never --rm --image=nginx:alpine -i -- curl http://project-plt-6cc-svc.pluto:3333
+kubectl exec -it temp -- curl http://project-plt-6cc-svc.pluto:3333/ > test.html
 ```
 
 #### Q11
