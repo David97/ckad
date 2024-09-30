@@ -1378,3 +1378,13 @@ spec:
   restartPolicy: Always
 status: {}
 ```
+
+#### Q7
+```sh
+remember to delete pods in old namespace
+```
+
+#### Q8
+```sh
+
+```
