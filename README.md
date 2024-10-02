@@ -1462,10 +1462,6 @@ spec:
     requests:
       storage: 3Gi
   storageClassName: moon-retain
-
-# 
-
-
 ```
 
 #### Q14
@@ -1475,7 +1471,24 @@ kubectl create secret generic secret1 -n moon --from-literal=user=test --from-li
 
 #### Q15
 ```sh
-
+apiVersion: v1
+data:
+  index.html: |     # notice the key index.html, this will be the filename when mounted
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Web Moon Webpage</title>
+    </head>
+    <body>
+    This is some great content.
+    </body>
+    </html>
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: configmap-web-moon-html
+  namespace: moon
 ```
 
 #### Q16
