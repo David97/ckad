@@ -1367,7 +1367,9 @@ helm -n mercury uninstall xxx
 
 #### Q5
 ```sh
-
+k -n neptune get sa # get overview
+k -n neptune get secrets # shows all secrets of namespace
+k -n neptune get secrets -oyaml | grep annotations -A 1 # shows secrets with first annotation
 ```
 
 #### Q6
