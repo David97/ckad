@@ -1348,7 +1348,16 @@ status: {}
 
 #### Q4
 ```sh
+helm ls -n mercury
+helm uninstall xxx -n mercury
+helm ls -n mercury
 
+helm repo list
+helm repo update
+helm search repo nginx
+
+helm -n mercury upgrade xxx bitnami/nginx
+helm ls -n mercury
 ```
 
 #### Q5
