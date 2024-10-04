@@ -1348,16 +1348,21 @@ status: {}
 
 #### Q4
 ```sh
-helm ls -n mercury
-helm uninstall xxx -n mercury
-helm ls -n mercury
+helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm repo list
 helm repo update
 helm search repo nginx
 
 helm -n mercury upgrade xxx bitnami/nginx
-helm ls -n mercury
+helm -n mercury ls
+
+helm show values bitnami/apache # will show a long list of all possible value-settings
+helm show values bitnami/apache | yq e # parse yaml and show with colors
+helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2 --set image.debug=true
+
+helm -n mercury ls -a
+helm -n mercury uninstall xxx
 ```
 
 #### Q5
