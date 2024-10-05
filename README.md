@@ -1514,7 +1514,14 @@ metadata:
 
 #### Q17
 ```sh
-
+      initContainers:                 # initContainer start
+      - name: init-con
+        image: busybox:1.31.0
+        command: ['sh', '-c', 'echo "check this out!" > /tmp/web-content/index.html']
+        volumeMounts:
+        - name: web-content
+          mountPath: /tmp/web-content # initContainer end
+      containers:
 ```
 
 #### Q18
