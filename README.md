@@ -1288,7 +1288,7 @@ kubectl create job whalesay --image=docker/whalesay --dry-run=client -o yaml > w
 ### _Simulator_
 #### Q1
 ```sh
-kubectl get ns -A > /opt/course/1/namespaces
+kubectl get ns > /opt/course/1/namespaces
 ```
 
 #### Q2
