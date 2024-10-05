@@ -1539,5 +1539,10 @@ metadata:
 
 #### Q22
 ```sh
+kubectl -n sun get pod --show-labels
 
+kubectl -n sun label pod -l type=runner protected=true
+kubectl -n sun label pod -l type=worker protected=true
+
+kubectl annotate pod -l protected=true protected="do not delete this pod"
 ```
