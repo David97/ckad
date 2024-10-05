@@ -1519,7 +1519,11 @@ metadata:
 
 #### Q18
 ```sh
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 10.0.1.14
 
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc.mars:4444
+
+Short manager-api-svc.mars or long manager-api-svc.mars.svc.cluster.local work.
 ```
 
 #### Q19
