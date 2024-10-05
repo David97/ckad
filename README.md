@@ -1509,7 +1509,14 @@ metadata:
 
 #### Q16
 ```sh
-
+      initContainers:
+      - name: logger-con                                                # add
+        image: busybox:1.31.0                                           # add
+        restartPolicy: Always                                           # add
+        command: ["sh", "-c", "tail -f /var/log/cleaner/cleaner.log"]   # add
+        volumeMounts:                                                   # add
+        - name: logs                                                    # add
+          mountPath: /var/log/cleaner                                   # add
 ```
 
 #### Q17
