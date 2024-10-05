@@ -1534,6 +1534,18 @@ metadata:
 
 #### Q21
 ```sh
+kubectl create deployment neptune-10ab -n neptune --image httpd:2.4-alpine --replicas 3 --dry-run=client -o yaml > 21_deploy.yaml
+
+  serviceAccountName: neptune-sa-v2
+  containers:
+  - name: neptune-10ab
+    image: httpd:2.4-alpine
+    resources:
+      requests:
+        memory: "20Mi"
+      limits:
+        memory: "50Mi"
+
 
 ```
 
