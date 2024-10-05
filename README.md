@@ -1524,6 +1524,14 @@ metadata:
 
 #### Q19
 ```sh
+  ports:
+  - name: 8080-80
+    port: 8080
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30100 # add the nodePort
+  #type: ClusterIP
+  type: NodePort    # change type
 
 ```
 
@@ -1565,8 +1573,6 @@ kubectl create deployment neptune-10ab -n neptune --image httpd:2.4-alpine --rep
         memory: "20Mi"
       limits:
         memory: "50Mi"
-
-
 ```
 
 #### Q22
