@@ -1529,7 +1529,27 @@ metadata:
 
 #### Q20
 ```sh
-
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: np1
+  namespace: venus
+spec:
+  podSelector:
+    matchLabels:
+      id: frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          id: api
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
 ```
 
 #### Q21
